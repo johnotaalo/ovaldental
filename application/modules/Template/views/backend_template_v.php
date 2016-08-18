@@ -12,14 +12,32 @@
 	<!-- Graph CSS -->
 	<link href="<?= @$this->config->item('assets_url'); ?>backend/css/font-awesome.css" rel="stylesheet"> 
 	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-	<!-- lined-icons -->
-	<link rel="stylesheet" href="<?= @$this->config->item('assets_url'); ?>backend/css/icon-font.min.css" type='text/css' />
+	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	lined-icons
+	<link rel="stylesheet" href="<?= @$this->config->item('assets_url'); ?>backend/css/icon-font.min.css" type='text/css' /> -->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
 	<?= @$css; ?>
 	<style type="text/css">
+		body
+		{
+			font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+		}
 		.control-label
 		{
 			line-height: 1px !important;
+		}
+
+		.table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th
+		{
+			color: rgb(119, 119, 119);
+		}
+
+		a
+		{
+			cursor: pointer;
+		}
+		table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+			vertical-align: middle;
 		}
 	</style>
 </head>
@@ -77,6 +95,23 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" tabindex="-1" role="dialog" id = "generalModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<p>One fine body&hellip;</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn red" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	<script src="<?= @$this->config->item('assets_url'); ?>backend/js/jquery-1.10.2.min.js"></script>
 	<script src="<?= @$this->config->item('assets_url'); ?>backend/js/jquery.nicescroll.js"></script>
 	<script src="<?= @$this->config->item('assets_url'); ?>backend/js/bootstrap.min.js"></script>

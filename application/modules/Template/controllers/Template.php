@@ -34,9 +34,10 @@ class Template extends MY_Controller
 	private function appendCss($assets)
 	{
 		$css_links = "";
+
 		foreach ($assets as $asset) {
 			if(is_array($asset))
-				$css_links .= "<link rel='stylesheet' type='text/css' href='{$asset}' />\r\n";
+				$css_links .= "<link rel='stylesheet' type='text/css' href='{$asset['link']}' />\r\n";
 			else
 				$css_links .= "<link rel='stylesheet' type='text/css' href='".$this->config->item('assets_url') . $asset."' />\r\n";
 		}
@@ -50,7 +51,7 @@ class Template extends MY_Controller
 
 		foreach ($assets as $asset) {
 			if(is_array($asset))
-				$js_links .= "<script src = '{$asset}'></script>\r\n";
+				$js_links .= "<script src = '{$asset['link']}'></script>\r\n";
 			else
 				$js_links .= "<script src = '" . $this->config->item('assets_url') . $asset . "'></script>\r\n";
 		}
@@ -68,6 +69,14 @@ class Template extends MY_Controller
 	private function getsidebar()
 	{
 		$sidebar_items = [
+			"Events" => [
+				"icon"	=>	"fa fa-calendar",
+				"link"	=>	"Event/eventlist"
+			],
+			"Insurance Companies"	=>	[
+				"icon"	=>	"fa fa-umbrella",
+				"link"	=>	"Settings/Insurance/companies"
+			],
 			"Users"	=>	[
 				"icon"	=>	"fa fa-users",
 				"link"	=>	"Account/users"

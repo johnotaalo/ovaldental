@@ -10,6 +10,7 @@ class Account extends MY_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Account/M_Account');
 	}
 
 	function users()
@@ -19,12 +20,11 @@ class Account extends MY_Controller
 		if ($staff) {
 			$counter = 1;
 			foreach ($staff as $member) {
-				$user = Users::first($member->staff_user_id);
-				// echo "<pre>";print_r($user);
+				$user = $this->M_Account->getUserById($member->staff_user_id);
 				$user_type = $status = "Not Defined";
 				if ($user) {
-					$user_type = Usertypes::first($user->user_type_id)->user_type;
-					echo $user->user_type_id . "<br/>";
+					$user_type = $this->M_Account->getUserType($user->user_type_id)->user_type;
+
 					if($user->user_is_active == 1):
 						$status = "<a href = '#' class = 'label label-success'>Active</a>";
 					else:
@@ -44,7 +44,6 @@ class Account extends MY_Controller
 				];
 				$counter++;
 			}
-			die;
 		}
 
 		
