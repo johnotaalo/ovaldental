@@ -71,15 +71,23 @@ class Template extends MY_Controller
 		$sidebar_items = [
 			"Events" => [
 				"icon"	=>	"fa fa-calendar",
-				"link"	=>	"Event/eventlist"
+				"link"	=>	"Event/eventlist",
+				"users"	=>	[2]
 			],
 			"Insurance Companies"	=>	[
 				"icon"	=>	"fa fa-umbrella",
-				"link"	=>	"Settings/Insurance/companies"
+				"link"	=>	"Settings/Insurance/companies",
+				"users"	=>	[2]
 			],
 			"Users"	=>	[
 				"icon"	=>	"fa fa-users",
-				"link"	=>	"Account/users"
+				"link"	=>	"Account/users",
+				"users"	=>	[2]
+			],
+			"Patients"	=>	[
+				"icon"	=>	"ion ion-android-people fa-2x",
+				"link"	=>	"Patients/all",
+				"users"	=>	[2]
 			]
 		];
 

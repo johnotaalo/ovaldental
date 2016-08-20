@@ -10,7 +10,8 @@
 	<!-- Custom CSS -->
 	<link href="<?= @$this->config->item('assets_url'); ?>backend/css/style.css" rel='stylesheet' type='text/css' />
 	<!-- Graph CSS -->
-	<link href="<?= @$this->config->item('assets_url'); ?>backend/css/font-awesome.css" rel="stylesheet"> 
+	<link href="<?= @$this->config->item('assets_url'); ?>backend/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- jQuery -->
 	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
 	lined-icons

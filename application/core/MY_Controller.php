@@ -9,7 +9,10 @@ class MY_Controller extends MX_Controller
 
 		//load the common modules here
 		$this->load->module([
-			"Template"
+			"Template",
+			"Account/Auth"
 		]);
+
+		$this->auth->checksignin();
 	}
 }
