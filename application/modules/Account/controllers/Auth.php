@@ -85,4 +85,9 @@ class Auth extends MX_Controller
 			return true;
 		endif;
 	}
+
+	function signout()
+	{
+		redirect(base_url() . 'Account/Auth/signin');
+	}
 }

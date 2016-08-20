@@ -7,6 +7,7 @@ class Template extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->library("Assets");
+		$this->load->model('Template/M_Template');
 	}
 
 	public function call_admin_template($data = array())
@@ -69,7 +70,7 @@ class Template extends MY_Controller
 	private function getsidebar()
 	{
 		$sidebar_items = [
-			"Events" => [
+			"Events" 				=> [
 				"icon"	=>	"fa fa-calendar",
 				"link"	=>	"Event/eventlist",
 				"users"	=>	[2]
@@ -79,26 +80,41 @@ class Template extends MY_Controller
 				"link"	=>	"Settings/Insurance/companies",
 				"users"	=>	[2]
 			],
-			"Users"	=>	[
+			"Users"					=>	[
 				"icon"	=>	"fa fa-users",
 				"link"	=>	"Account/users",
 				"users"	=>	[2]
 			],
-			"Patients"	=>	[
+			"Patients"				=>	[
 				"icon"	=>	"ion ion-android-people fa-2x",
 				"link"	=>	"Patients/all",
-				"users"	=>	[2]
+				"users"	=>	[3]
+			],
+			"Appointments"			=>	[
+				"icon"	=>	"fa fa-clock-o",
+				"link"	=>	"Appointments/all",
+				"users"	=>	[3]
 			]
 		];
 
-		$list = "";
-		foreach ($sidebar_items as $item => $detail) {
-			$list .= "<li><a href = '".base_url($detail['link'])."'><i class = '{$detail['icon']}'></i> <span>{$item}</span></a></li>";
+		$user_details = $this->M_Template->getUserDetails($this->session->userdata('user_id'));
+		if ($user_details) {
+			$user_type = $this->M_Template->getUserTypeByUser($user_details->user_type_id);
+			$list = "";
+			foreach ($sidebar_items as $item => $detail) {
+				if (in_array($user_details->user_type_id, $detail['users'])) {
+					$list .= "<li><a href = '".base_url($detail['link'])."'><i class = '{$detail['icon']}'></i> <span>{$item}</span></a></li>";
+				}
+			}
+			$data['user_role'] = $user_type->user_type;
+			$data['sidebar_items'] = $list;
+			$sidebar = $this->load->view("Template/backend_sidebar", $data, TRUE);
+
+			return $sidebar;
 		}
-
-		$data['sidebar_items'] = $list;
-		$sidebar = $this->load->view("Template/backend_sidebar", $data, TRUE);
-
-		return $sidebar;
+		else
+		{
+			redirect(base_url() . 'Account/Auth/signin');
+		}
 	}
 }
