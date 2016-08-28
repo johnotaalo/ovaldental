@@ -33,7 +33,7 @@
       .done(function(res){
         res = jQuery.parseJSON(res);
         if (res.type == true) {
-          alert("Success");
+          window.location = '<?php echo base_url(); ?>' + res.redirect_url;
         }
         else{
           alert(res.message);

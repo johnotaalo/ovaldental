@@ -174,6 +174,75 @@
 
     function Visit($visit_uuid)
     {
+      $visit = $this->M_Patients->findVisitByUUID($visit_uuid);
+
+      if($visit)
+      {
+        if(!$this->input->post()){
+          $data['assets']['css'] = [
+            "backend/plugins/select2/css/select2.min.css",
+            "backend/plugins/sweetalert/sweetalert.css"
+          ];
+
+
+          $data['assets']['js'] = [
+            "backend/plugins/select2/js/select2.min.js",
+            "backend/plugins/sweetalert/sweetalert.min.js"
+          ];
+
+          $data['content_view'] = 'Patients/HealthForm';
+          $data['javascript'] = [
+              'js'	=>	"Patients/partials/health_form_js",
+              'data'	=>	[]
+            ];
+
+          $this->template->call_admin_template($data);
+        }
+        else{
+          // echo "<pre>";print_r($this->input->post());die;
+          $insert_data = array();
+
+          $insert_data['visit_id']          = $visit->visit_id;
+          $insert_data['medication']        = $this->input->post('medication');
+          if($this->input->post('medication') == 1){
+            $insert_data['yes_medication_specific']= $this->input->post('yes_medication_specific');
+          }
+
+          $insert_data['treatment']         = $this->input->post('treatment');
+          $insert_data['conditions']        = implode("||", $this->input->post('conditions'));
+          $insert_data['health_condition']  = $this->input->post('health-condition');
+          if($this->input->post('health-condition') == 1){
+            $insert_data['yes_health_condition_specific'] = $this->input->post('yes_health_condition_specific');
+          }
+
+          $insert_data['allergies']         = $this->input->post('allergies-radio');
+          if($this->input->post('allergies-radio') == 1)
+          {
+            $insert_data['allergies_available'] = implode("||", $this->input->post('allergies'));
+            if($this->input->post("allergies-others-specific"))
+            {
+              $insert_data['allergies_other_specific'] = $this->input->post("allergies-others-specific");
+            }
+          }
+
+          $insert_data['take_care_of_teeth'] = implode("||", $this->input->post('taking_care_of_teeth'));
+
+          $insert_data['bore_hole_supply'] = $this->input->post('bore_hole_supply');
+
+          $inserted = $this->M_Patients->addHealthFormInformation($insert_data);
+
+          if($inserted)
+          {
+            // add patient to queue
+          }
+          else{
+            show_error("There was an error entering your details");
+          }
+        }
+      }
+      else {
+        show_404();
+      }
 
     }
   }

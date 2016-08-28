@@ -59,4 +59,18 @@
 
       return $this->db->insert_id();
     }
+
+    function findVisitByUUID($visit_uuid)
+    {
+      $this->db->where('uuid', $visit_uuid);
+
+      $query = $this->db->get('patient_start_visit');
+
+      return $query->row();
+    }
+
+    function addHealthFormInformation($insert_data)
+    {
+      return $this->db->insert('patient_visit_health_form', $insert_data);
+    }
   }
